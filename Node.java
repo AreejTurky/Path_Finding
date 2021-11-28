@@ -31,7 +31,7 @@ public class Node {
         this.h=Math.sqrt(x+y);
     }
     //Manhattan Distance 
-    public void calculate_Manhattan_Heuristic(Node1 finalNode) {
+    public void calculate_Manhattan_Heuristic(Node finalNode) {
         this.h = Math.abs(finalNode.getRow() - getRow()) + Math.abs(finalNode.getCol() - getCol());
     }
 
