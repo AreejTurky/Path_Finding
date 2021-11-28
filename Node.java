@@ -22,10 +22,17 @@ public class Node {
         this.col = col;
     }
 
-    public void calculateHeuristic(Node InitialNode) {        //Euclidean Distance
+   /*                      Two Different heuristics                    */
+   
+    //Euclidean Distance
+    public void calculate_Euclidean_Heuristic(Node InitialNode) {        
         double x = Math.pow(Math.abs(getRow()- InitialNode.getRow()) , 2);  
         double y=Math.pow(Math.abs(getCol()- InitialNode.getCol()) , 2);
         this.h=Math.sqrt(x+y);
+    }
+    //Manhattan Distance 
+    public void calculate_Manhattan_Heuristic(Node1 finalNode) {
+        this.h = Math.abs(finalNode.getRow() - getRow()) + Math.abs(finalNode.getCol() - getCol());
     }
 
     public void setNodeData(Node currentNode, int cost) {
