@@ -27,41 +27,7 @@ public class AStarTest {
         // 4    -   -   -   -   -   H3  -
         // 5    -   -   -   -   -   -   D
 
-        //Expected output with diagonals
-        //Node [row=2, col=1]
-        //Node [row=1, col=2]
-        //Node [row=0, col=3]
-        //Node [row=0, col=4]
-        //Node [row=1, col=5]
-        //Node [row=2, col=6]
+ 
 
-        //Search Path with diagonals
-        //      0   1   2   3   4   5   6
-        // 0    -   -   -   *   -   -   -
-        // 1    -   -   *   B   *   -   -
-        // 2    -   I*  -   B   -  *F   -
-        // 3    -   -   -   B   -   -   -
-        // 4    -   -   -   -   -   -   -
-        // 5    -   -   -   -   -   -   -
-
-        //Expected output without diagonals
-        //Node [row=2, col=1]
-        //Node [row=2, col=2]
-        //Node [row=1, col=2]
-        //Node [row=0, col=2]
-        //Node [row=0, col=3]
-        //Node [row=0, col=4]
-        //Node [row=1, col=4]
-        //Node [row=2, col=4]
-        //Node [row=2, col=5]
-
-        //Search Path without diagonals
-        //      0   1   2   3   4   5   6
-        // 0    -   -   *   *   *   -   -
-        // 1    -   -   *   B   *   -   -
-        // 2    -   I*  *   B   *  *F   -
-        // 3    -   -   -   B   -   -   -
-        // 4    -   -   -   -   -   -   -
-        // 5    -   -   -   -   -   -   -
     }
 }
