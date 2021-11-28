@@ -52,7 +52,7 @@ public class AStar {
         for (int i = 0; i < searchArea.length; i++) {
             for (int j = 0; j < searchArea[0].length; j++) {
                 Node node = new Node(i, j);
-                node.calculateHeuristic(getInitialNode());
+                node.calculate_Euclidean_Heuristic(getInitialNode());
                 this.searchArea[i][j] = node;
                
             }
@@ -72,9 +72,9 @@ public class AStar {
         while(!goals.isEmpty())
         {
              NearestGoal= goals.get(0);                    //initally, first goal is the closest
-             NearestGoal.calculateHeuristic(getInitialNode());
+             NearestGoal.calculate_Euclidean_Heuristic(getInitialNode());
             for(int i=1 ; i<= goals.size()-1 ; i++)
-            {   goals.get(i).calculateHeuristic(getInitialNode());
+            {   goals.get(i).calculate_Euclidean_Heuristic(getInitialNode());
                 if(goals.get(i).getH() < NearestGoal.getH())            //is the seconed goal nearest from the 1st one?
                 {
                     NearestGoal= goals.get(i);
