@@ -1,4 +1,4 @@
-package com.ai.astar;
+package Folder;
 
 /**
  * Node Class
@@ -7,13 +7,12 @@ package com.ai.astar;
  * @version 2.0, 2018-02-23
  */
 public class Node {
-
+    
+    private int row;
+    private int col;
     private double g;
     private double f;
     private double h;
-    private int row;
-    private int col;
-    private boolean isBlock;
     private Node parent;
 
     public Node(int row, int col) {
@@ -64,7 +63,7 @@ public class Node {
 
     @Override
     public String toString() {
-        return "Node [row=" + row + ", col=" + col + "]";
+        return "Node{" + "row=" + row + ", col=" + col + ", f=" + f + ", g=" + g+ ", h=" + h + ", parent=" + parent + '}';
     }
 
     public double getH() {
@@ -97,14 +96,6 @@ public class Node {
 
     public void setParent(Node parent) {
         this.parent = parent;
-    }
-
-    public boolean isBlock() {
-        return isBlock;
-    }
-
-    public void setBlock(boolean isBlock) {
-        this.isBlock = isBlock;
     }
 
     public int getRow() {
