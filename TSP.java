@@ -1,29 +1,16 @@
-
-package a;
-
+package Folder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-
 public class TSP {
-    
-         static Node W  = new Node(0, 0); // start point
-         static Node H1 = new Node(2 , 6);
-         static Node H2 = new Node(1 , 3);
-         static Node H3 = new Node(3 , 5);
-         static Node H4 = new Node(4 , 2);
-         static Node D  = new Node(0 , 6);
-    
-         
-    
-    private final Map<String, Map<String, Double>> distances;
+	private final Map<String, Map<String, Double>> distances;
     private static String InitalNode;
-   
+
 	public TSP(Map<String, Map<String, Double>> distances , String InitalNode) {
-	this.distances = distances;
+		this.distances = distances;
         this.InitalNode=InitalNode;
 	}
 
@@ -67,7 +54,6 @@ public class TSP {
 			// distance to get back from last city to first city
 			last = next;
 		}
-               
 		return distance;
 	}
 
@@ -85,217 +71,101 @@ public class TSP {
 				shortestPath = path;
 			}
 		}
-                
-              
 		return shortestPath;
-        }
-        
-        public int GoToDepote(String[] path){
-            
-               String a=Arrays.toString(path); // path without depot
-               double distance=0;
-               
-               
-               String LastHouse=a.substring(a.length() - 3) ;
-               LastHouse= LastHouse.replace(LastHouse.substring(LastHouse.length()-1), "");//last house
-             
-                 // compute the distance between last house and the depot
-                 if(LastHouse.compareTo("H1")==0)
-                   distance= D.calculate_Euclidean_Heuristic(H1);
-                
-                 if(LastHouse.compareTo("H2")==0)
-                   distance= D.calculate_Euclidean_Heuristic(H2);
-                 
-                  if(LastHouse.compareTo("H3")==0)
-                   distance= D.calculate_Euclidean_Heuristic(H3);
-                  
-                  if(LastHouse.compareTo("H4")==0)
-                   distance= D.calculate_Euclidean_Heuristic(H4);
-            
-            
-        return (int) distance;
-            
-        }
-         public String NewPath(String[] path){
-             
-            String a=Arrays.toString((path));
-            a = a.replace(a.substring(a.length()-1), ""); 
-            a=a+", D]";
-                
-            return a;
-             
-         }
-     
+	}
 
 	public static void main(String[] args) {
-         
-        
-        
-         
-       /* Graph
-        
-   
-          0   1   2   3   4   5   6
-        
-        0 W   -   -   -   -    -   -
-        
-        1 -   -   -   H2   -   -   -
-        
-        2 -   -   -   -    -   -   H1
-        
-        3 -   -   -   -    -   H3  -
-        
-        4 -   -   H4   -   -   -   -
-        
-        5 -   -   -   -    -   -   D
-        
-    */  
-      
-        
-      Map<String, Map <String, Double> > vtDistances = 
-      Map.of(
-                      
-             "W", 
-      Map.of("H1", W.calculate_Digonal_Heuristic(H1) + TSP.W.getG(),
-             "H2", W.calculate_Digonal_Heuristic(H2) + W.getG(),
-             "H3", W.calculate_Digonal_Heuristic(H3) + W.getG(),
-             "H4", W.calculate_Digonal_Heuristic(H4) + W.getG()),
-          
-             
-              
-             "H1", 
-      Map.of("H2", H1.calculate_Digonal_Heuristic(H2) + H1.getG(),
-             "H3", H1.calculate_Digonal_Heuristic(H3) + H1.getG(),
-             "H4", H1.calculate_Digonal_Heuristic(H4) + H1.getG(),
-             "W",  H1.calculate_Digonal_Heuristic(W)  + H1.getG()) ,
-           
-             
-             "H2", 
-      Map.of("H1", H2.calculate_Digonal_Heuristic(H1) + H2.getG(),
-             "H3", H2.calculate_Digonal_Heuristic(H3) + H2.getG(),
-             "H4", H2.calculate_Digonal_Heuristic(H4) + H2.getG(),
-             "W",  H2.calculate_Digonal_Heuristic(W)  + H2.getG()),
-             
-              "H3",          
-       Map.of("H1", H3.calculate_Digonal_Heuristic(H1) + H3.getG(),
-              "H2", H3.calculate_Digonal_Heuristic(H2) + H3.getG(),
-              "H4", H3.calculate_Digonal_Heuristic(H4) + H3.getG(),
-              "W",  H3.calculate_Digonal_Heuristic(W)  + H3.getG()),
-     
+        Node w= new Node(0, 0);
+        Node n1= new Node(1 , 1);
+        Node n2= new Node(1 , 2);
+        Node n3= new Node(2 , 3);
+        Node D= new Node(3 , 3);
        
-              "H4",
-       Map.of("H1", H4.calculate_Digonal_Heuristic(H1) + H4.getG(),
-              "H2", H4.calculate_Digonal_Heuristic(H2) + H4.getG(),
-              "H3", H4.calculate_Digonal_Heuristic(H3) + H4.getG(),
-              "W" , H4.calculate_Digonal_Heuristic(W)  + H4.getG())
-      
-      );
-      
-       Map<String, Map <String, Double> > vt2Distances = 
-      Map.of(
-                      
-             "W", 
-      Map.of("H1", W.calculate_Euclidean_Heuristic(H1) + W.getG(),
-             "H2", W.calculate_Euclidean_Heuristic(H2) + W.getG(),
-             "H3", W.calculate_Euclidean_Heuristic(H3) + W.getG(),
-             "H4", W.calculate_Euclidean_Heuristic(H4) + W.getG()),  
-              
-             "H1", 
-      Map.of("H2", H1.calculate_Euclidean_Heuristic(H2) + H1.getG(),
-             "H3", H1.calculate_Euclidean_Heuristic(H3) + H1.getG(),
-             "H4", H1.calculate_Euclidean_Heuristic(H4) + H1.getG(),
-             "W",  H1.calculate_Euclidean_Heuristic(W)  + H1.getG()) ,
-           
-             
-             "H2", 
-      Map.of("H1", H2.calculate_Euclidean_Heuristic(H1) + H2.getG(),
-             "H3", H2.calculate_Euclidean_Heuristic(H3) + H2.getG(),
-             "H4", H2.calculate_Euclidean_Heuristic(H4) + H2.getG(),
-             "W",  H2.calculate_Euclidean_Heuristic(W)  + H2.getG()),
-             
-              "H3",          
-       Map.of("H1", H3.calculate_Euclidean_Heuristic(H1) + H3.getG(),
-              "H2", H3.calculate_Euclidean_Heuristic(H2) + H3.getG(),
-              "H4", H3.calculate_Euclidean_Heuristic(H4) + H3.getG(),
-               "W",  H3.calculate_Euclidean_Heuristic(W)  + H3.getG()),
-   
-       
-              "H4",
-       Map.of("H1", H4.calculate_Euclidean_Heuristic(H1) + H4.getG(),
-              "H2", H4.calculate_Euclidean_Heuristic(H2) + H4.getG(),
-              "H3", H4.calculate_Euclidean_Heuristic(H3) + H4.getG(),
-               "W" , H4.calculate_Euclidean_Heuristic(W)  + H4.getG())
-      
-      );
-       
-         Map<String, Map <String, Double> > vt3Distances = 
-      Map.of(
-                      
-             "W", 
-      Map.of("H1", W.calculate_Manhattan_Heuristic(H1) + W.getG(),
-             "H2", W.calculate_Manhattan_Heuristic(H2) + W.getG(),
-             "H3", W.calculate_Manhattan_Heuristic(H3) + W.getG(),
-             "H4", W.calculate_Manhattan_Heuristic(H4) + W.getG()),
-           
-             
-              
-             "H1", 
-      Map.of("H2", H1.calculate_Manhattan_Heuristic(H2) + H1.getG(),
-             "H3", H1.calculate_Manhattan_Heuristic(H3) + H1.getG(),
-             "H4", H1.calculate_Manhattan_Heuristic(H4) + H1.getG(),
-             "W",  H1.calculate_Manhattan_Heuristic(W)  + H1.getG()) ,
-           
-             
-             "H2", 
-      Map.of("H1", H2.calculate_Manhattan_Heuristic(H1) + H2.getG(),
-             "H3", H2.calculate_Manhattan_Heuristic(H3) + H2.getG(),
-             "H4", H2.calculate_Manhattan_Heuristic(H4) + H2.getG(),
-             "W",  H2.calculate_Manhattan_Heuristic(W)  + H2.getG()),
-             
-              "H3",          
-       Map.of("H1", H3.calculate_Manhattan_Heuristic(H1) + H3.getG(),
-              "H2", H3.calculate_Manhattan_Heuristic(H2) + H3.getG(),
-              "H4", H3.calculate_Manhattan_Heuristic(H4) + H3.getG(),
-              "W",  H3.calculate_Manhattan_Heuristic(W)  + H3.getG()),
-       
-      
-              "H4",
-       Map.of("H1", H4.calculate_Manhattan_Heuristic(H1) + H4.getG(),
-              "H2", H4.calculate_Manhattan_Heuristic(H2) + H4.getG(),
-              "H3", H4.calculate_Manhattan_Heuristic(H3) + H4.getG(),
-              "W" , H4.calculate_Manhattan_Heuristic(W)  + H4.getG())
-      
-      );
-				
-		TSP tsp  = new TSP(vtDistances , "W");
-                TSP tsp2 = new TSP(vt2Distances , "W");
-                TSP tsp3 = new TSP(vt3Distances , "W");
+        List<Node> sn= new ArrayList<>();
+        List<Node> n1n= new ArrayList<>();
+        List<Node> n2n= new ArrayList<>();
+        List<Node> n3n= new ArrayList<>();
 
-       
-                String[] shortestPath = tsp.findShortestPath();
-              
-                int distance = tsp.pathDistance(shortestPath)+ tsp.GoToDepote(shortestPath);
-               
-               System.out.println("The path is " + tsp.NewPath(shortestPath) + " in " +
-				distance + " miles." + " With Digonal Heuristic");
-                
-               
-                String[] shortestPath2 = tsp2.findShortestPath();
-		int distance2 = tsp2.pathDistance(shortestPath2)+tsp2.GoToDepote(shortestPath2);
-              
-                
-		System.out.println("The path is " + tsp2.NewPath(shortestPath2) + " in " +
-				distance2 + " miles." + " With Euclidean Heuristic (Optimal)");
-                
-                
-                
-                 String[] shortestPath3 = tsp3.findShortestPath();
-		int distance3 = tsp3.pathDistance(shortestPath3)+tsp3.GoToDepote(shortestPath3);
-              
-                
-		System.out.println("The path is " + tsp3.NewPath(shortestPath3) + " in " +
-				distance3 + " miles." + " With Manhatten Heuristic");
 		
-        }
-    
+/* 				INITIALIZING SET OF NEIGHBORS 					*/
+		sn.add(n1);
+		sn.add(n2);
+		sn.add(n3);
+		
+		n1n.add(w);
+		n1n.add(n2);
+		n1n.add(n3);
+		
+		n2n.add(w);
+		n2n.add(n1);
+		n2n.add(n3);
+
+		n3n.add(w);
+		n3n.add(n1);
+		n3n.add(n2);
+/* 				SETTING UP THESE NEIGHBORS e.g., DISTANCE AND HEURISICS				*/
+		w.setNeighbors(sn);
+		w.neighbors.get(0).setG(15);
+		w.neighbors.get(0).setH(w.calculate_Manhattan_Heuristic(n1));
+		w.neighbors.get(1).setG(10);
+		w.neighbors.get(1).setH(w.calculate_Manhattan_Heuristic(n2));
+		w.neighbors.get(2).setG(20);
+		w.neighbors.get(2).setH(w.calculate_Manhattan_Heuristic(n3));
+
+		n1.setNeighbors(n1n);
+		n1.neighbors.get(0).setG(15);
+		n1.neighbors.get(0).setH(n1.calculate_Manhattan_Heuristic(w));
+		n1.neighbors.get(1).setG(10);
+		n1.neighbors.get(1).setH(n1.calculate_Manhattan_Heuristic(n2));
+		n1.neighbors.get(2).setG(20);
+		n1.neighbors.get(2).setH(n1.calculate_Manhattan_Heuristic(n3));
+
+		n2.setNeighbors(n2n);
+		n2.neighbors.get(0).setG(20);
+		n2.neighbors.get(0).setH(n2.calculate_Manhattan_Heuristic(w));
+		n2.neighbors.get(1).setG(10);
+		n2.neighbors.get(1).setH(n2.calculate_Manhattan_Heuristic(n1));
+		n2.neighbors.get(2).setG(20);
+		n2.neighbors.get(2).setH(n2.calculate_Manhattan_Heuristic(n3));
+
+		n3.setNeighbors(n3n);
+		n3.neighbors.get(0).setG(10);
+		n3.neighbors.get(0).setH(n3.calculate_Manhattan_Heuristic(w));
+		n3.neighbors.get(1).setG(20);
+		n3.neighbors.get(1).setH(n3.calculate_Manhattan_Heuristic(n1));
+		n3.neighbors.get(2).setG(20);
+		n3.neighbors.get(2).setH(n3.calculate_Manhattan_Heuristic(n2));
+
+
+		Map<String, Map <String, Double> > vtDistances = Map.of(
+		"w", Map.of(
+		"n1", w.getNeighbors().get(0).getF(),
+		"n2", w.getNeighbors().get(1).getF(),
+		"n3", n1.getNeighbors().get(2).getF()
+		),
+		"n1", Map.of(
+        "w",  n1.getNeighbors().get(0).getF(),
+		"n2", n1.getNeighbors().get(1).getF(),
+        "n3", n1.getNeighbors().get(2).getF()
+        ),
+        "n2", Map.of(
+		"w",  n2.getNeighbors().get(0).getF(),
+        "n1", n2.getNeighbors().get(1).getF(),
+        "n3", n2.getNeighbors().get(2).getF()
+        ),
+        "n3", Map.of(
+		"w",  n3.getNeighbors().get(0).getF(),
+        "n1", n3.getNeighbors().get(1).getF(),
+        "n2", n3.getNeighbors().get(2).getF()
+        )
+        );
+				
+		TSP tsp = new TSP(vtDistances , "w");
+
+		String[] shortestPath = tsp.findShortestPath();
+		int distance = tsp.pathDistance(shortestPath);
+		System.out.println("The shortest path is " + Arrays.toString(shortestPath) + " in " +
+				distance + " miles.");
+		
+	}
 }
