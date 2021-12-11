@@ -81,91 +81,13 @@ public class TSP {
         Node n3= new Node(2 , 3);
         Node D= new Node(3 , 3);
        
-        List<Node> sn= new ArrayList<>();
-        List<Node> n1n= new ArrayList<>();
-        List<Node> n2n= new ArrayList<>();
-        List<Node> n3n= new ArrayList<>();
 
-		
-/* 				INITIALIZING SET OF NEIGHBORS 					*/
-		sn.add(n1);
-		sn.add(n2);
-		sn.add(n3);
-		
-		n1n.add(w);
-		n1n.add(n2);
-		n1n.add(n3);
-		
-		n2n.add(w);
-		n2n.add(n1);
-		n2n.add(n3);
-
-		n3n.add(w);
-		n3n.add(n1);
-		n3n.add(n2);
-/* 				SETTING UP THESE NEIGHBORS e.g., DISTANCE AND HEURISICS				*/
-		w.setNeighbors(sn);
-		w.neighbors.get(0).setG(15);
-		w.neighbors.get(0).setH(w.calculate_Manhattan_Heuristic(n1));
-		w.neighbors.get(1).setG(10);
-		w.neighbors.get(1).setH(w.calculate_Manhattan_Heuristic(n2));
-		w.neighbors.get(2).setG(20);
-		w.neighbors.get(2).setH(w.calculate_Manhattan_Heuristic(n3));
-
-		n1.setNeighbors(n1n);
-		n1.neighbors.get(0).setG(15);
-		n1.neighbors.get(0).setH(n1.calculate_Manhattan_Heuristic(w));
-		n1.neighbors.get(1).setG(10);
-		n1.neighbors.get(1).setH(n1.calculate_Manhattan_Heuristic(n2));
-		n1.neighbors.get(2).setG(20);
-		n1.neighbors.get(2).setH(n1.calculate_Manhattan_Heuristic(n3));
-
-		n2.setNeighbors(n2n);
-		n2.neighbors.get(0).setG(20);
-		n2.neighbors.get(0).setH(n2.calculate_Manhattan_Heuristic(w));
-		n2.neighbors.get(1).setG(10);
-		n2.neighbors.get(1).setH(n2.calculate_Manhattan_Heuristic(n1));
-		n2.neighbors.get(2).setG(20);
-		n2.neighbors.get(2).setH(n2.calculate_Manhattan_Heuristic(n3));
-
-		n3.setNeighbors(n3n);
-		n3.neighbors.get(0).setG(10);
-		n3.neighbors.get(0).setH(n3.calculate_Manhattan_Heuristic(w));
-		n3.neighbors.get(1).setG(20);
-		n3.neighbors.get(1).setH(n3.calculate_Manhattan_Heuristic(n1));
-		n3.neighbors.get(2).setG(20);
-		n3.neighbors.get(2).setH(n3.calculate_Manhattan_Heuristic(n2));
-
-
-		Map<String, Map <String, Double> > vtDistances = Map.of(
-		"w", Map.of(
-		"n1", w.getNeighbors().get(0).getF(),
-		"n2", w.getNeighbors().get(1).getF(),
-		"n3", n1.getNeighbors().get(2).getF()
-		),
-		"n1", Map.of(
-        "w",  n1.getNeighbors().get(0).getF(),
-		"n2", n1.getNeighbors().get(1).getF(),
-        "n3", n1.getNeighbors().get(2).getF()
-        ),
-        "n2", Map.of(
-		"w",  n2.getNeighbors().get(0).getF(),
-        "n1", n2.getNeighbors().get(1).getF(),
-        "n3", n2.getNeighbors().get(2).getF()
-        ),
-        "n3", Map.of(
-		"w",  n3.getNeighbors().get(0).getF(),
-        "n1", n3.getNeighbors().get(1).getF(),
-        "n2", n3.getNeighbors().get(2).getF()
-        )
-        );
-				
-		TSP tsp = new TSP(vtDistances , "w");
-
-		String[] shortestPath = tsp.findShortestPath();
-		int distance = tsp.pathDistance(shortestPath);
-		System.out.println("The shortest path is " + Arrays.toString(shortestPath) + " in " +
-				distance + " miles.");
-		
+		w.addBranch(15, n1);
+		w.addBranch(10, n2);
+		w.addBranch(20, n3);
+		System.out.println(w.getNeighbor().get(0).f);		//map parameter #2 
+		n1.addBranch(15, w);
+		n1.addBranch(45, n2);
+		n1.addBranch(50, n3);
 	}
 }
